@@ -39,7 +39,7 @@ async function setup() {
     const conf = results[0].confidence;
     const percent = (conf * 100).toFixed(2);
 
-    // The results are in an array ordered by confidence
+    // The results are in an array ordered by c onfidence
     console.log(results);
 
     label.innerText = results[0].label;
@@ -74,3 +74,38 @@ async function setup() {
     });
   }
 }
+
+document.addEventListener("DOMContentLoaded", async function () {
+  classifier = await ml5.imageClassifier("MobileNet");
+
+  document
+    .getElementById("upload")
+    .addEventListener("change", function (event) {
+      const file = event.target.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const img = document.getElementById("preview");
+          img.src = e.target.result;
+          img.style.display = "block";
+        };
+
+        reader.readAsDataURL(file);
+      }
+    });
+
+  document
+    .getElementById("classify")
+    .addEventListener("click", async function () {
+      const img = document.getElementById("preview");
+      const resultsLabel = document.getElementById("resultsLabel");
+
+      const results = await classifier.classify(img);
+
+      console.log(results);
+
+      resultsLabel.innerText = results[0].label;
+    });
+});

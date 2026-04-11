@@ -63,6 +63,20 @@ p {
   margin-top: 50px;
 }
 
+#upload {
+  margin: 10px 0 0 0;
+}
+
+#preview {
+  display: none;
+  max-width: 350px;
+  max-height: 350px;
+  width: auto;
+  height: auto;
+  border-radius: 15px;
+  margin-bottom: 25px;
+}
+
 #classify {
   font-size: medium;
   padding: 5px;
@@ -70,7 +84,7 @@ p {
 }
 
 #classify:hover {
-  background-color: seagreen;
+  background-color: rgb(73, 171, 73);
 }
 
 #auswertung {
