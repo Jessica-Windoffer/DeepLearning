@@ -101,52 +101,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
       const img = document.getElementById("preview");
       const resultsLabel = document.getElementById("resultsLabel");
-      const errorMessage = document.getElementById("errorMessage");
-      const canvas = document.getElementById("uploadChart");
-
-      errorMessage.innerText = "";
-
-      // Check if picture has been selected
-      if (!img.src || img.src === window.location.href) {
-        errorMessage.innerText = "Upload a picture first!";
-        return;
-      }
 
       const results = await classifier.classify(img);
-
-      const conf = results[0].confidence;
-      const percent = conf * 100;
 
       console.log(results);
 
       resultsLabel.innerText = results[0].label;
-      // Farbe bestimmen
-      const color = percent < 50 ? "#f44336" : "#2b9326";
-
-      // Falls Chart schon existiert → löschen (wichtig!)
-      if (canvas.chartInstance) {
-        canvas.chartInstance.destroy();
-      }
-
-      // neuen Chart erstellen
-      canvas.chartInstance = new Chart(canvas, {
-        type: "doughnut",
-        data: {
-          labels: ["Confidence", "Rest"],
-          datasets: [
-            {
-              data: [percent, 100 - percent],
-              backgroundColor: [color, "#ccc8c8"],
-            },
-          ],
-        },
-        options: {
-          responsive: false,
-          plugins: {
-            legend: { display: false },
-          },
-        },
-        plugins: [centerTextPlugin],
-      });
     });
 });

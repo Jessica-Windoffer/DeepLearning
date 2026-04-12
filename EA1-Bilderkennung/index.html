@@ -20,7 +20,7 @@
 
       <h4>Korrekte Klassifizierung</h4>
 
-      <div class="containerThreePictures">
+      <div class="containerThreePictures korrektKlassifiziert">
         <!-- Container für Bild 1 -->
         <div class="card">
           <div>
@@ -80,7 +80,7 @@
 
       <h4>Falsche Klassifizierung</h4>
 
-      <div class="containerThreePictures">
+      <div class="containerThreePictures falschKlassifiziert">
         <!-- Container für Bild 4 -->
         <div class="card">
           <div>
@@ -148,9 +148,11 @@
         >
         <br />
         <input type="file" id="upload" accept="image/*" />
-        <br /><br />
+        <br />
         <img id="preview" src="" />
       </div>
+
+      <p id="errorMessage"></p>
 
       <button id="classify">Classify →</button>
 
@@ -161,12 +163,17 @@
 
       <div class="confidenceAndText">
         <h5>Confidence:</h5>
-        <canvas class="chart" width="150" height="150"></canvas>
+        <canvas
+          id="uploadChart"
+          class="chart"
+          width="150"
+          height="150"
+        ></canvas>
       </div>
     </div>
 
     <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script_dynamic-logic.js"></script>
 
     <div id="auswertung">
       <h3>Auswertung</h3>
