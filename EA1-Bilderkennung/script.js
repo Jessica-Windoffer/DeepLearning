@@ -1,6 +1,31 @@
 // Initialize the Image Classifier method with MobileNet. A callback needs to be passed.
 let classifier;
 
+const imageSources = [
+  "./bildDateien/cat.jpg",
+  "./bildDateien/banana.jpeg",
+  "./bildDateien/castle.jpeg",
+  "./bildDateien/trees.jpg",
+  "./bildDateien/fruits.jpg",
+  "./bildDateien/flower-field.jpg",
+];
+
+const resultsArray = [];
+
+function createCard(imgSrc, labelText, percent, color) {
+  const template = document.getElementById("cardTemplate");
+  const clone = template.content.cloneNode(true);
+
+  const card = clone.querySelector(".card");
+  const img = clone.querySelector(".image");
+  const label = clone.querySelector(".label");
+
+  img.src = imgSrc;
+  label.innerText = labelText;
+
+  return card;
+}
+
 const centerTextPlugin = {
   beforeDraw(chart) {
     const { ctx = document.querySelector(".chart"), width, height } = chart;
@@ -12,7 +37,7 @@ const centerTextPlugin = {
     // Styles regarding the text inside the Doghnut Chart can only be set inside JS-file
     // Cannot be styled externally in CSS-file
     ctx.font =
-      "bold 15px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', sans-serif"; // Set font properties
+      "bold 14px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', sans-serif"; // Set font properties
     ctx.fillStyle = "#000000"; // Set color of text to black
     ctx.textAlign = "center"; // Align text to center on vertical line
     ctx.textBaseline = "middle"; // Align text to center on horizontal line
@@ -26,31 +51,56 @@ const centerTextPlugin = {
 async function setup() {
   createCanvas(400, 400);
 
+  const loaderCorrect = document.getElementById("loaderCorrect");
+  const loaderWrong = document.getElementById("loaderWrong");
+
+  loaderCorrect.classList.remove("hidden");
+  loaderWrong.classList.remove("hidden");
+
   classifier = await ml5.imageClassifier("MobileNet");
 
-  const cards = document.querySelectorAll(".card");
+  const korrektContainer = document.querySelector(".korrektKlassifiziert");
+  const falschContainer = document.querySelector(".falschKlassifiziert");
 
-  for (let card of cards) {
-    const img = card.querySelector(".image");
-    const label = card.querySelector(".label");
-    const canvas = card.querySelector(".chart");
+  const resultsArray = [];
+
+  // 🔹 1. Alle Bilder klassifizieren und speichern
+  for (let src of imageSources) {
+    const img = new Image();
+    img.src = src;
+
+    await new Promise((resolve) => (img.onload = resolve));
 
     const results = await classifier.classify(img);
-    const conf = results[0].confidence;
-    const percent = (conf * 100).toFixed(2);
 
-    // The results are in an array ordered by c onfidence
-    console.log(results);
+    const label = results[0].label;
+    const confidence = results[0].confidence;
 
-    label.innerText = results[0].label;
+    resultsArray.push({
+      src,
+      label,
+      confidence,
+    });
+  }
 
-    if (percent < 50) {
-      color = "#f44336";
+  // 🔹 2. Sortieren (höchste Confidence zuerst)
+  resultsArray.sort((a, b) => b.confidence - a.confidence);
+
+  // 🔹 3. Rendern
+  for (let item of resultsArray) {
+    const percent = item.confidence * 100;
+    const color = percent < 50 ? "#f44336" : "#2b9326";
+
+    const card = createCard(item.src, item.label, percent.toFixed(2), color);
+
+    if (percent >= 50) {
+      korrektContainer.appendChild(card);
     } else {
-      color = "#2b9326";
+      falschContainer.appendChild(card);
     }
 
-    // Create Doughnut Chart
+    const canvas = card.querySelector(".chart");
+
     new Chart(canvas, {
       type: "doughnut",
       data: {
@@ -65,14 +115,16 @@ async function setup() {
       options: {
         responsive: false,
         plugins: {
-          legend: {
-            display: false,
-          },
+          legend: { display: false },
         },
       },
       plugins: [centerTextPlugin],
     });
   }
+
+  // Loader ausblenden
+  loaderCorrect.classList.add("hidden");
+  loaderWrong.classList.add("hidden");
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -101,14 +153,17 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
       const img = document.getElementById("preview");
       const resultsLabel = document.getElementById("resultsLabel");
-      const errorMessage = document.getElementById("errorMessage");
+      const errorMessageClassify = document.getElementById(
+        "errorMessageClassify",
+      );
       const canvas = document.getElementById("uploadChart");
 
-      errorMessage.innerText = "";
+      errorMessageClassify.innerText = "";
 
       // Check if picture has been selected
       if (!img.src || img.src === window.location.href) {
-        errorMessage.innerText = "Upload a picture first!";
+        errorMessageClassify.innerText =
+          "Wähle / Lade bitte zuerst ein Bild hoch!";
         return;
       }
 
@@ -149,4 +204,38 @@ document.addEventListener("DOMContentLoaded", async function () {
         plugins: [centerTextPlugin],
       });
     });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    const img = document.getElementById("preview");
+    const resultsLabel = document.getElementById("resultsLabel");
+    const errorMessageReset = document.getElementById("errorMessageReset");
+    const canvas = document.getElementById("uploadChart");
+    const fileInput = document.getElementById("upload");
+
+    // Prüfen, ob überhaupt etwas vorhanden ist
+    const hasImage = img.src && img.src !== window.location.href;
+    const hasLabel = resultsLabel.innerText !== "";
+    const hasChart = canvas.chartInstance;
+
+    if (!hasImage && !hasLabel && !hasChart) {
+      errorMessageReset.innerText = "Es gibt nichts zu resetten!";
+      return;
+    }
+
+    // Inhalte zurücksetzen
+    img.src = "";
+    img.style.display = "none";
+
+    resultsLabel.innerText = "";
+
+    fileInput.value = ""; // wichtig, damit man dasselbe Bild nochmal hochladen kann
+
+    // Chart entfernen
+    if (canvas.chartInstance) {
+      canvas.chartInstance.destroy();
+      canvas.chartInstance = null;
+    }
+
+    errorMessageReset.innerText = "";
+  });
 });
