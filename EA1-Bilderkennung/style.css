@@ -3,6 +3,9 @@
     "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+body {
+  margin-left: 1%;
+}
 
 h1 {
   text-align: center;
@@ -35,6 +38,31 @@ p {
   margin: 10px 0 10px 0;
 }
 
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #74cb70;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px 0;
+}
+
+/* Dreh-Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Verstecken */
+.hidden {
+  display: none;
+}
+
 .image {
   border-radius: 15px;
 }
@@ -63,14 +91,36 @@ p {
   margin-top: 50px;
 }
 
-#classify {
+#upload {
+  margin: 10px 0 15px 0;
+}
+
+#errorMessageClassify,
+#errorMessageReset {
+  color: red;
+  margin-bottom: 10px;
+}
+
+#preview {
+  display: none;
+  max-width: 350px;
+  max-height: 350px;
+  width: auto;
+  height: auto;
+  border-radius: 15px;
+  margin-bottom: 25px;
+}
+
+#classify,
+#reset {
   font-size: medium;
   padding: 5px;
   border-radius: 5px;
 }
 
-#classify:hover {
-  background-color: seagreen;
+#classify:hover,
+#reset:hover {
+  background-color: rgb(73, 171, 73);
 }
 
 #auswertung {

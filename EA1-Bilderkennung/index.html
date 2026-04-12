@@ -19,136 +19,59 @@
       <h3>Aufgabe 1</h3>
 
       <h4>Korrekte Klassifizierung</h4>
-
-      <div class="containerThreePictures">
-        <!-- Container für Bild 1 -->
-        <div class="card">
-          <div>
-            <img
-              class="image"
-              width="200"
-              height="200"
-              src="./bildDateien/cat.jpg"
-            />
-
-            <div class="labelAndText">
-              <h5>Label:</h5>
-              <p class="label"></p>
-            </div>
-          </div>
-
-          <div class="confidenceAndText">
-            <h5>Confidence:</h5>
-            <canvas class="chart" width="150" height="150"></canvas>
-          </div>
-        </div>
-
-        <!-- Container für Bild 2 -->
-        <div class="card">
-          <div>
-            <img class="image" height="200" src="./bildDateien/banana.jpeg" />
-
-            <div class="labelAndText">
-              <h5>Label:</h5>
-              <p class="label"></p>
-            </div>
-          </div>
-
-          <div class="confidenceAndText">
-            <h5>Confidence:</h5>
-            <canvas class="chart" width="150" height="150"></canvas>
-          </div>
-        </div>
-
-        <!-- Container für Bild 3 -->
-        <div class="card">
-          <div>
-            <img class="image" height="200" src="./bildDateien/castle.jpeg" />
-
-            <div class="labelAndText">
-              <h5>Label:</h5>
-              <p class="label"></p>
-            </div>
-          </div>
-
-          <div class="confidenceAndText">
-            <h5>Confidence:</h5>
-            <canvas class="chart" width="150" height="150"></canvas>
-          </div>
-        </div>
-      </div>
+      <div id="loaderCorrect" class="loader"></div>
+      <div class="containerThreePictures korrektKlassifiziert"></div>
 
       <h4>Falsche Klassifizierung</h4>
+      <div id="loaderWrong" class="loader"></div>
 
-      <div class="containerThreePictures">
-        <!-- Container für Bild 4 -->
-        <div class="card">
-          <div>
-            <img class="image" height="200" src="./bildDateien/trees.jpg" />
-
-            <div class="labelAndText">
-              <h5>Label:</h5>
-              <p class="label"></p>
-            </div>
-          </div>
-
-          <div class="confidenceAndText">
-            <h5>Confidence:</h5>
-            <canvas class="chart" width="150" height="150"></canvas>
-          </div>
-        </div>
-
-        <!-- Container für Bild 5 -->
-        <div class="card">
-          <div>
-            <img class="image" height="200" src="./bildDateien/fruits.jpg" />
-
-            <div class="labelAndText">
-              <h5>Label:</h5>
-              <p class="label"></p>
-            </div>
-          </div>
-
-          <div class="confidenceAndText">
-            <h5>Confidence:</h5>
-            <canvas class="chart" width="150" height="150"></canvas>
-          </div>
-        </div>
-
-        <!-- Container für Bild 6 -->
-        <div class="card">
-          <div>
-            <img
-              class="image"
-              height="200"
-              src="./bildDateien/flower-field.jpg"
-            />
-
-            <div class="labelAndText">
-              <h5>Label:</h5>
-              <p class="label"></p>
-            </div>
-          </div>
-
-          <div class="confidenceAndText">
-            <h5>Confidence:</h5>
-            <canvas class="chart" width="150" height="150"></canvas>
-          </div>
-        </div>
-      </div>
+      <div
+        class="containerThreePictures falschKlassifiziert containerExcerciseOne"
+      ></div>
     </div>
-
-    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
-    <script src="script.js"></script>
 
     <!-- Container für die Aufgabe A2 -->
     <div id="displayAsChart">
       <h3>Aufgabe 2</h3>
       <h4>Bild</h4>
-      <input type="file" id="upload" />
-      <button id="classify">Classify</button>
+      <div>
+        <label for="file"
+          >Wähle ein Bild aus oder platziere ein Bild per Drag & Drop um es zu
+          klassifizieren!</label
+        >
+        <br />
+        <input type="file" id="upload" accept="image/*" />
+        <br />
+        <img id="preview" src="" />
+      </div>
+
+      <p id="errorMessageClassify"></p>
+
+      <button id="classify">Classify →</button>
+
+      <div class="labelAndText">
+        <h5>Label:</h5>
+        <p id="resultsLabel"></p>
+      </div>
+
+      <div class="confidenceAndText">
+        <h5>Confidence:</h5>
+        <canvas
+          id="uploadChart"
+          class="chart"
+          width="150"
+          height="150"
+        ></canvas>
+      </div>
+
+      <p id="errorMessageReset"></p>
+      <button id="reset">Reset →</button>
     </div>
 
+    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Container für die Auswertung -->
     <div id="auswertung">
       <h3>Auswertung</h3>
       <h4>Diskussion</h4>
@@ -158,3 +81,21 @@
     </div>
   </body>
 </html>
+
+<template id="cardTemplate">
+  <div class="card">
+    <div>
+      <img class="image" height="200" />
+
+      <div class="labelAndText">
+        <h5>Label:</h5>
+        <p class="label"></p>
+      </div>
+    </div>
+
+    <div class="confidenceAndText">
+      <h5>Confidence:</h5>
+      <canvas class="chart" width="125" height="125"></canvas>
+    </div>
+  </div>
+</template>
