@@ -1,5 +1,3 @@
-<!--  -->
-
 <!doctype html>
 <html lang="de">
   <head>
@@ -10,7 +8,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!--  -->
+    <!-- Head- und Subheadline for orientation indicating what to expect on the website -->
     <h1>Image Classification</h1>
     <h2>
       Bearbeitung der EA1 <br />
@@ -21,44 +19,58 @@
     <div>
       <h3>Aufgabe 1</h3>
 
+      <!-- Section for correct classification  -->
       <h4>Korrekte Klassifizierung</h4>
+      <!-- Loader which appears for as long as the pictures are classified in the background -->
       <div id="loaderCorrect" class="loader"></div>
+      <!-- Area for correctly classified images  -->
       <div class="containerThreePictures korrektKlassifiziert"></div>
 
+      <!-- Section for wrong classification  -->
       <h4>Falsche Klassifizierung</h4>
       <div id="loaderWrong" class="loader"></div>
-
-      <div
-        class="containerThreePictures falschKlassifiziert containerExcerciseOne"
-      ></div>
+      <!-- Area for misclassified images  -->
+      <div class="containerThreePictures falschKlassifiziert"></div>
     </div>
 
     <!-- Container for excercise A2 -->
     <div id="displayAsChart">
       <h3>Aufgabe 2</h3>
       <h4>Bild</h4>
+
+      <!-- Section for uploading a picture by user -->
       <div>
+        <!-- Label for the following input field -->
         <label for="file"
           >Wähle ein Bild aus oder platziere ein Bild per Drag & Drop um es zu
           klassifizieren!</label
         >
         <br />
+        <!-- Input field to upload a picture or drag and drop into the box -->
+        <!-- 'accept="image/*"' states that every type of image is allowed for uploading -->
         <input type="file" id="upload" accept="image/*" />
         <br />
+        <!-- Placeholder for the image that user upload -->
+        <!-- 'src=""' states that currently no image is set -->
         <img id="preview" src="" />
       </div>
 
-      <p id="errorMessageClassify"></p>
-
+      <!-- Button for the process of classification to set in motion -->
       <button id="classify">Classify →</button>
 
+      <!-- Text field for error message when no image is uploaded via the input field -->
+      <p id="errorMessageClassify"></p>
+
+      <!-- Section for the label that the classification results in -->
       <div class="labelAndText">
         <h5>Label:</h5>
         <p id="resultsLabel"></p>
       </div>
 
+      <!-- Section for the confidence that the classification results in -->
       <div class="confidenceAndText">
         <h5>Confidence:</h5>
+        <!-- Artboard/Drawing area for the diagram in which the result of the classification is graphically represented -->
         <canvas
           id="uploadChart"
           class="chart"
@@ -67,11 +79,22 @@
         ></canvas>
       </div>
 
-      <p id="errorMessageReset"></p>
+      <!-- Button for resetting the uploaded picture, the label and/or the confidence back to null -->
       <button id="reset">Reset →</button>
+
+      <!-- Text field for error message when no image is uploaded via the input field or no classification was carried out -->
+      <p id="errorMessageReset"></p>
     </div>
 
+    <!-- Loads external JavaScript library - in this case ml5 -->
+    <!-- https://unpkg.com/ -> Server that provides files -->
+    <!-- ml5@1 -> Version 1 of the library -->
+    <!-- dist/ml5.min.js -> finished, compressed version (faster) -->
     <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+
+    <!-- Loads own JavaScript file -->
+    <!-- If this script is loaded before the HTML, JavaScript elements 'upload', 'preview', 'classify' etc.
+         like  will return null because the element doesn't exist yet.-->
     <script src="script.js"></script>
 
     <!-- Container for conclusion-->
@@ -85,17 +108,23 @@
   </body>
 </html>
 
+<!-- Defines an invisible template, is not displayed directly in the browser, is later copied using JavaScript
+     and can be cloned any number of times-->
 <template id="cardTemplate">
+  <!-- Single “card” for an image + result (label + classification) -->
   <div class="card">
     <div>
+      <!-- Placeholder for an image that will later be filled via JS (class="image") and has a fixed height of 200px -->
       <img class="image" height="200" />
 
+      <!-- Placeholder for the label that will later be filled via JS (class="label") -->
       <div class="labelAndText">
         <h5>Label:</h5>
         <p class="label"></p>
       </div>
     </div>
 
+    <!-- Placeholder for the confidence that will later be filled via JS (class="chart") and has a fixed width and height of 125px -->
     <div class="confidenceAndText">
       <h5>Confidence:</h5>
       <canvas class="chart" width="125" height="125"></canvas>
