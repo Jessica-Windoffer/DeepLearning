@@ -182,28 +182,102 @@
       <div>
         <h5>Technisch</h5>
         <ul>
+          <!-- Frameworks used -->
           <li id="subheadlineConclusion">Verwendete Frameworks</li>
           <ul>
-            <li>ml5.js</li>
+            <li id="subsubheadlineConclusion">ml5.js</li>
             <ul>
-              <li></li>
+              <li>
+                Integration von Machine-Learning-Funktionalität im Browser
+                <br />
+                → Hier: Nutzung des vortrainierten Modells "MobileNet" <br />
+                → Vorteil: Kein eigenes Training notwendig, Klassifikation
+                sofort im Browser durchführbar
+              </li>
+              <li>
+                Dient der Klassifikation von Bildern und übernimmt die komplette
+                KI-Logik <br />
+                → Das Erkennen und Bewerten von Bildinhalten
+              </li>
+              <li>
+                Gesamte Verarbeitung erfolgt client- und nicht serverseitig im
+                Browser <br />
+                → Anwendung ist datenschutzfreundlicher und schneller
+              </li>
             </ul>
-            <li>p5.js</li>
+            <li id="subsubheadlineConclusion">p5.js</li>
             <ul>
-              <li></li>
+              <li>
+                Bereitstellung der 'setup ( )' - Funktion und
+                Ablauf-Strukturierung
+              </li>
+              <li>
+                Automatische Ausführung beim Start der Seite <br />
+                → Gut geeignet für den Start von Initialisierungen <br />
+                (z.B. KI-Modell laden) oder das Klassifizieren der Bilder
+              </li>
+              <li>
+                Vorteil: Vereinfachter Einstieg in grafische und interaktive
+                Webanwendungen
+              </li>
             </ul>
-            <li>chart.js</li>
+            <li id="subsubheadlineConclusion">chart.js</li>
             <ul>
-              <li></li>
+              <li>
+                Darstellung der Confidence-Werte als Doughnut-Diagramm <br />
+                → Erweiterung durch Implementierung eines Plugins das
+                Prozentwerte <br />
+                direkt in die Mitte des Diagramms schreibt
+              </li>
+              <li>
+                Dient der visuell verständlicheren Darstellung der KI-Ergebnisse
+              </li>
+              <li>
+                Diagramme werden dynamisch erstellt und auch wieder gelöscht
+                <br />
+                → Anwendung bleibt interaktiv und reagiert direkt auf
+                Nutzereingaben
+              </li>
             </ul>
           </ul>
+
+          <!-- Technical features -->
           <li id="subheadlineConclusion">Technische Besonderheiten</li>
+          <ul>
+            <li>
+              Klassifikation erfolgt asynchron (async/await) <br />
+              → Laden des Modells und die Bildverarbeitung benötigen Zeit
+            </li>
+            <li>
+              Verwendung eines Template-System <br />
+              → Dynamische Erzeugung von wiederverwendbare Karten für die
+              Darstellung der Ergebnisse
+            </li>
+            <li>
+              Sortierung der Ergebnisse nach Confidence <br />
+              → Anzeige der zuverlässigsten Klassifikationen zuerst <br />
+              → Erhöhung der UX
+            </li>
+            <li>
+              Implementierung eines Custom Plugin in Chart.js <br />
+              → Darstellung des Prozentwertes direkt im Zentrum des
+              Doughnut-Diagramms
+            </li>
+            <li>
+              Tennung zwischen automatischer Klassifikation (vordefinierte
+              Bilder) <br />
+              und interaktiver Klassifikation (Upload durch Nutzer) <br />
+              → Erhöhung der UX
+            </li>
+          </ul>
         </ul>
       </div>
 
       <!-- Professional documentation -->
-      <h5>Fachlich</h5>
-      <p>More to come...</p>
+      <div>
+        <h5>Fachlich</h5>
+        <p>More to come...</p>
+      </div>
     </div>
   </body>
 </html>

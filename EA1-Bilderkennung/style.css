@@ -189,6 +189,12 @@ li {
   line-height: 1.5;
 }
 
+/* Sets font-style of subheadline of conclusions */
 #subheadlineConclusion {
   font-weight: bold;
+}
+
+/* Sets font-style of sub-subheadline of technical documentation */
+#subsubheadlineConclusion {
+  font-style: italic;
 }
