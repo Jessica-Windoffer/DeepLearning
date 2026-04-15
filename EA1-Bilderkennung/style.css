@@ -48,6 +48,7 @@ h4 {
 h5 {
   font-size: medium;
   margin: 0.8% 0 0.8% 0;
+  color: rgb(129, 207, 19);
 }
 
 /* Setting fix margin at the top and the bottom of text enough space
@@ -170,4 +171,24 @@ p {
 /* Setting styles for the Conclusion part found after excercise A2 */
 #conclusion {
   margin-top: 2.5%;
+}
+
+/* Setting styles for the list showing the points of discussion and documentation */
+ul {
+  margin-top: 0.1%;
+  padding-left: 1.3%;
+}
+
+/* Determines gap between each bullet point */
+ul li {
+  margin-bottom: 0.5%;
+}
+
+/* Determines the line spacing within an element */
+li {
+  line-height: 1.5;
+}
+
+#subheadlineConclusion {
+  font-weight: bold;
 }

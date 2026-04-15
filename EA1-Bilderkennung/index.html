@@ -99,12 +99,109 @@
 
     <!-- Container for conclusion-->
     <div id="conclusion">
-      <h3>Auswertung</h3>
-      <h4>Diskussion</h4>
-      <p>More to come...</p>
+      <!-- Section for evaluation - discussion -->
+      <div>
+        <h3>Auswertung</h3>
+        <h4>Diskussion</h4>
+
+        <!-- The following structure of nested list-elements is used throughout the complete conclusion part  -->
+        <!-- Starts an unordered list (bullet points) -->
+        <ul>
+          <!-- List item -->
+          <li id="subheadlineConclusion">Beobachtungen</li>
+          <!-- Nested list (2nd level) -->
+          <ul>
+            <li>
+              Das verwendete KI-Modell "ml5" funktioniert besonders gut bei klar
+              erkennbaren, einzelnen Objekten
+            </li>
+            <!-- Nested list (3rd level) -->
+            <ul>
+              <li>
+                Bilder von Gegenständen wie der Katze / der Banane werden
+                korrekter klassifiziert, <br />da sie typische Merkmale
+                besitzen, die im Trainingsdatensatz häufig vorkommen
+              </li>
+              <li>
+                Bilder mit komplexeren Motiven (wie z.B. mit vielen
+                verschiedenen Objekten bei Wä0ldern / Obstellern) <br />
+                werden ungenauer / weniger eindeutig klassifiziert, weil mehrere
+                mögliche Kategorien gleichzeitig <br />
+                vorhanden / möglich / zutreffend sind
+              </li>
+            </ul>
+
+            <li>
+              Bildqualität und Hintergrund sind ebenso von Bedeutung, da
+              unruhige oder detailreiche Hintergründe <br />
+              das Modell verwirren können
+            </li>
+
+            <li>
+              Ungewöhnliche Perspektive / Darstellungen des Objekts sowie
+              Helligkeit (Winkel, Höhe, Belichtung) <br />
+              erschweren die Klassifizierung, da diese von den Trainingsdaten
+              abweichen können
+            </li>
+          </ul>
+
+          <li id="subheadlineConclusion">Es zeigt sich also</li>
+          <ul>
+            <li>
+              Das KI-Modell ist vor allem für Standardobjekte optimiert ist
+            </li>
+            <li>
+              Confidence-Werte zeigen dabei eine grobe Tendenz bezüglich
+              Sicherheit der Vorhersage, <br />
+              sind aber nicht immer ein Garant für Korrektheit
+            </li>
+          </ul>
+
+          <li id="subheadlineConclusion">Meine Learnings</li>
+          <ul>
+            <li>
+              KI-Modelle sind stark von Trainingsdatensätzen abhängig <br />
+              → Je ähnlicher ein Bild diesen Daten ist, desto besser
+              funktioniert die Klassifikation
+            </li>
+            <li>
+              Confidence (Wahrscheinlichkeit) != mit der tatsächlichen
+              Korrektheit der Klassifikation <br />
+              → Das Modell kann sich zwar „sicher“ in seiner Entscheidung sein,
+              aber trotzdem falsch liegen <br />
+              → Daher sollte KI-Ergebnisse immer kritisch hinterfragt werden und
+              nicht blind übernommen werden
+            </li>
+          </ul>
+        </ul>
+      </div>
+
+      <!-- Section for documentation -->
       <h4>Dokumentation</h4>
-      <h5>Technisch</h5>
-      <p>More to come...</p>
+      <!-- Technical documentation -->
+      <div>
+        <h5>Technisch</h5>
+        <ul>
+          <li id="subheadlineConclusion">Verwendete Frameworks</li>
+          <ul>
+            <li>ml5.js</li>
+            <ul>
+              <li></li>
+            </ul>
+            <li>p5.js</li>
+            <ul>
+              <li></li>
+            </ul>
+            <li>chart.js</li>
+            <ul>
+              <li></li>
+            </ul>
+          </ul>
+          <li id="subheadlineConclusion">Technische Besonderheiten</li>
+        </ul>
+      </div>
+
+      <!-- Professional documentation -->
       <h5>Fachlich</h5>
       <p>More to come...</p>
     </div>
