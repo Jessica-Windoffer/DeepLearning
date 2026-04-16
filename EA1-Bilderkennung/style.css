@@ -47,14 +47,14 @@ h4 {
 /*  Setting headline to medium, because in original size it is to small */
 h5 {
   font-size: medium;
-  margin: 0.8% 0 0.8% 0;
+  margin: 0 0 0.8% 0;
   color: rgb(129, 207, 19);
 }
 
 /* Setting fix margin at the top and the bottom of text enough space
 to the elements before and after is granted */
 p {
-  margin: 0.8% 0 0.8% 0;
+  margin: 0 0 0.8% 0;
 }
 
 /* Setting the styles for the loader placed under the two headings
@@ -179,11 +179,6 @@ ul {
   padding-left: 1.3%;
 }
 
-/* Determines gap between each bullet point */
-ul li {
-  margin-bottom: 0.5%;
-}
-
 /* Determines the line spacing within an element */
 li {
   line-height: 1.5;
@@ -197,4 +192,9 @@ li {
 /* Sets font-style of sub-subheadline of technical documentation */
 #subsubheadlineConclusion {
   font-style: italic;
+}
+
+#containerTechnicalDocumentation {
+  display: flex;
+  flex-direction: row;
 }
